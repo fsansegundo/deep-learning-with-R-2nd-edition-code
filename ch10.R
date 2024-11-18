@@ -4,11 +4,9 @@ tensorflow::as_tensor(1)
 
 
 ## ---- eval = FALSE--------------------------------------------------------
-## url <-
-##   "https://s3.amazonaws.com/keras-datasets/jena_climate_2009_2016.csv.zip"
+## url <- "https://s3.amazonaws.com/keras-datasets/jena_climate_2009_2016.csv.zip"
 ## download.file(url, destfile = basename(url))
-## zip::unzip(zipfile = "jena_climate_2009_2016.csv.zip",
-##            files = "jena_climate_2009_2016.csv")
+## zip::unzip(zipfile = "jena_climate_2009_2016.csv.zip", files = "jena_climate_2009_2016.csv")
 
 
 ## ---- results = 'hide'----------------------------------------------------
@@ -185,37 +183,67 @@ sprintf("Test MAE: %.2f", evaluate_naive_method(test_dataset))
 
 
 ## -------------------------------------------------------------------------
+# ncol_input_data <- length(input_data_colnames)
+# 
+# inputs <- layer_input(shape = c(sequence_length, ncol_input_data))
+# outputs <- inputs %>%
+#   layer_flatten() %>%
+#   layer_dense(16, activation="relu") %>%
+#   layer_dense(1)
+# model <- keras_model(inputs, outputs)
+# 
+# callbacks = list(
+#     callback_model_checkpoint("jena_dense.keras",
+#                               save_best_only=TRUE)
+# )
+# 
+# model %>%
+#   compile(optimizer = "rmsprop",
+#           loss = "mse",
+#           metrics = "mae")
+# 
+# 
+# ## -------------------------------------------------------------------------
+# history <- model %>%
+#   fit(train_dataset,
+#       epochs = 10,
+#       validation_data = val_dataset,
+#       callbacks = callbacks)
+# 
+# 
+# ## -------------------------------------------------------------------------
+# model <- load_model_tf("jena_dense.keras")
+# sprintf("Test MAE: %.2f", evaluate(model, test_dataset)["mae"])
+
 ncol_input_data <- length(input_data_colnames)
 
 inputs <- layer_input(shape = c(sequence_length, ncol_input_data))
 outputs <- inputs %>%
   layer_flatten() %>%
-  layer_dense(16, activation="relu") %>%
+  layer_dense(16, activation = "relu") %>%
   layer_dense(1)
 model <- keras_model(inputs, outputs)
 
-callbacks = list(
-    callback_model_checkpoint("jena_dense.keras",
-                              save_best_only=TRUE)
-)
+callbacks = list (
+  callback_model_checkpoint("jena_dense.keras",
+                            save_best_only = TRUE)
+)   
 
 model %>%
   compile(optimizer = "rmsprop",
-          loss = "mse",
-          metrics = "mae")
+          loss = "mse",   
+          metrics = "mae")   
 
-
-## -------------------------------------------------------------------------
 history <- model %>%
   fit(train_dataset,
       epochs = 10,
       validation_data = val_dataset,
       callbacks = callbacks)
 
-
-## -------------------------------------------------------------------------
 model <- load_model_tf("jena_dense.keras")
 sprintf("Test MAE: %.2f", evaluate(model, test_dataset)["mae"])
+
+
 
 
 ## -------------------------------------------------------------------------
