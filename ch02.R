@@ -4,8 +4,9 @@ tensorflow::as_tensor(1)
 
 ## -------------------------------------------------------------------------
 library(keras3)
-# library(tensorflow)
+
 mnist <- dataset_mnist()
+
 train_images <- mnist$train$x
 train_labels <- mnist$train$y
 test_images <- mnist$test$x
@@ -29,10 +30,11 @@ model <- model %>%
   layer_dense(units = 512, activation = "relu") %>%
   layer_dense(units = 10, activation = "softmax")
 
-model <- keras_model_sequential(list(
-  layer_dense(units = 512, activation = "relu"),
-  layer_dense(units = 10, activation = "softmax")
-))
+model
+# model <- keras_model_sequential(list(
+#   layer_dense(units = 512, activation = "relu"),
+#   layer_dense(units = 10, activation = "softmax")
+# ))
 
 
 ## -------------------------------------------------------------------------
@@ -93,8 +95,8 @@ length(dim(x))
 
 
 ## -------------------------------------------------------------------------
-library(keras)
 mnist <- dataset_mnist()
+library(keras)
 train_images <- mnist$train$x
 train_labels <- mnist$train$y
 test_images <- mnist$test$x
