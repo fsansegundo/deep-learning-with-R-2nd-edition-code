@@ -1,3 +1,10 @@
+#' Used this instruction in Ubuntu Linux 22.04, 2024-11.
+#'
+
+# remotes::install_github("rstudio/keras")
+# keras3::install_keras(backend = "tensorflow")
+
+
 ## ----setup, include=FALSE-------------------------------------------------
 tensorflow::as_tensor(1)
 
@@ -585,3 +592,4 @@ predictions <- as.array(predictions)
 predicted_labels <- max.col(predictions) - 1
 matches <- predicted_labels == test_labels
 cat(sprintf("accuracy: %.2f\n", mean(matches)))
+
