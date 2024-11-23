@@ -1,3 +1,21 @@
+#' ---
+#' title: "Deep Learning with R, 2nd edition"
+#' author: ""
+#' date: "2024-11"
+#' output:
+#'  html_document:
+#'    toc: true
+#'    toc_depth: 4
+#'    toc_float:
+#'      toc_collapsed: true
+#'    toc-location: left
+#'
+#' ---
+#'
+#'
+
+
+
 #' Used this instruction in Ubuntu Linux 22.04, 2024-11.
 #'
 
@@ -63,7 +81,7 @@ fit(model, train_images, train_labels, epochs = 5, batch_size = 128)
 
 
 ## -------------------------------------------------------------------------
-test_digits <- test_images[1:10, ]
+test_digits <- test_images[1:15, ]
 predictions <- predict(model, test_digits)
 str(predictions)
 predictions[1, ]
